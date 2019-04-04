@@ -1,0 +1,14 @@
+
+.top-right {
+    position: absolute;
+    top: 100px;
+    right: 16px;
+    color: rgb(0, 139, 30);
+  }
+  .modal-header{
+      background-color: #343a40;
+      color: white;
+  }
+  .close{
+      color: white;
+  }
