@@ -1,22 +1,79 @@
 var width = 640;
-// var client = new HttpClient();
 var height = 480;
 var detector;
 var item = false;
-function nextItem() {
-    item = true;
-}
+var result=[]
+var maleSixty=[];
+var maleForty=[];
+var maleTwenty=[];
+var womenTwenty=[];
+var womenForty=[];
+var womenSixty=[];
 onload = function () {
 
-    
-    // client.get('https://g7gu5b2l8j.execute-api.us-east-1.amazonaws.com/developer ', function(response) {
-    //     console.log(response);
-    //     // do something with response
-    // });
+    $.get("https://g7gu5b2l8j.execute-api.us-east-1.amazonaws.com/developer", function(data, status){
+        // alert("Data: " + data + "\nStatus: " + status);
+        // console.log(JSON.stringify(data.body));
+    result=JSON.stringify(data.body)
+    console.log(result);
+    console.log(data.body)
+    for(i=0;i<data.body.length;i++){
+        if(data.body[i].customerAge=="M-40"){
+            maleForty.push(data.body[i].dress1);
+            maleForty.push(data.body[i].dress2);
+            maleForty.push(data.body[i].dress3);
+            maleForty.push(data.body[i].dress4);
+            maleForty.push(data.body[i].dress5);
+        }
+        else if(data.body[i].customerAge=="M-60"){
+            maleSixty.push(data.body[i].dress1);
+            maleSixty.push(data.body[i].dress2);
+            maleSixty.push(data.body[i].dress3);
+            maleSixty.push(data.body[i].dress4);
+            maleSixty.push(data.body[i].dress5);
+        }
+        else if(data.body[i].customerAge=="M-20"){
+            maleTwenty.push(data.body[i].dress1);
+            maleTwenty.push(data.body[i].dress2);
+            maleTwenty.push(data.body[i].dress3);
+            maleTwenty.push(data.body[i].dress4);
+            maleTwenty.push(data.body[i].dress5);
+        }
+        else if(data.body[i].customerAge=="W-20"){
+            womenTwenty.push(data.body[i].dress1);
+            womenTwenty.push(data.body[i].dress2);
+            womenTwenty.push(data.body[i].dress3);
+            womenTwenty.push(data.body[i].dress4);
+            womenTwenty.push(data.body[i].dress5);
+        }
+        else if(data.body[i].customerAge=="W-40"){
+            womenForty.push(data.body[i].dress1);
+            womenForty.push(data.body[i].dress2);
+            womenForty.push(data.body[i].dress3);
+            womenForty.push(data.body[i].dress4);
+            womenForty.push(data.body[i].dress5);
+        }
+        else if(data.body[i].customerAge=="W-60"){
+            womenSixty.push(data.body[i].dress1);
+            womenSixty.push(data.body[i].dress2);
+            womenSixty.push(data.body[i].dress3);
+            womenSixty.push(data.body[i].dress4);
+            womenSixty.push(data.body[i].dress5);
+        }
+    }
+        console.log(maleSixty);
+        console.log(maleForty);
+        console.log(maleTwenty);
+        console.log(womenTwenty);
+        console.log(womenForty);
+        console.log(womenSixty);
+        document.getElementById("myImg").src=data.body[3].dress3;
+      });
 
     // SDK Needs to create video and canvas nodes in the DOM in order to function
     // Here we are adding those nodes a predefined div.
-    var divRoot = document.getElementById("affdex_elements");
+    var divRoot = $("#affdex_elements")[0];
+    // var divRoot = document.getElementById("affdex_elements");
 
     //Construct a CameraDetector and specify the image width / height and face detector mode.
     detector = new affdex.CameraDetector(divRoot, width, height, affdex.FaceDetectorMode.LARGE_FACES);
@@ -116,7 +173,7 @@ onload = function () {
                 $("#myModal").modal();
                 detector.stop();
             }
-            else if (faces[0].emotions["anger"] > 50 && faces[0].appearance["gender"]=="Male") {
+            else if (faces[0].emotions["anger"] > 30 && faces[0].appearance["gender"]=="Male") {
                 document.getElementById("myui").innerHTML = "Anger";
                 document.getElementById("myImg").src = "https://www.montecarlo.in/images/slider1.jpg";
                 setTimeout(function(){
@@ -155,11 +212,10 @@ onload = function () {
                 document.getElementById("myui").innerHTML = "";
                 document.getElementById("category").innerHTML="Female"
                 document.getElementById("myImg").src = "https://cdn.shopify.com/s/files/1/0022/9530/0155/t/7/assets/DISTRICT_HPSLIDER.jpg";
-                setTimeout(function(){
-                    detector.reset();
-                  }, 3000);
             }
             else if (faces[0].appearance["gender"] == 'Female' && faces[0].emotions["joy"]>75) {
+                document.getElementById("category").innerHTML="Female";
+                document.getElementById("cartImage").src="https://arbikas.com/pub/media/wysiwyg/smartwave/porto/homepage/03/slider/slide2.jpg";
                 document.getElementById("myImg").src = "https://arbikas.com/pub/media/wysiwyg/smartwave/porto/homepage/03/slider/slide2.jpg";
                 setTimeout(function(){
                     detector.reset();
@@ -189,12 +245,7 @@ onload = function () {
         }
     });
 }
-window.onclick = function (event) {
-    var modal = document.getElementById('myModal');
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
+
 function log(node_name, msg) {
     document.getElementById(node_name).innerHTML += "<span>" + msg + "</span><br/>"
 }
@@ -225,13 +276,6 @@ function onReset() {
         document.getElementById("results").innerHTML = ""
     }
 }
-
-// var client = new HttpClient();
-// client.get('https://g7gu5b2l8j.execute-api.us-east-1.amazonaws.com/developer ', function(response) {
-//     console.log(response)
-//     // do something with response
-// });
-
 //Draw the detected facial feature points on the image
 function drawFeaturePoints(img, featurePoints) {
     var c = document.getElementById("face_video_canvas");
