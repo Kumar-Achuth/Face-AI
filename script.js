@@ -2,73 +2,85 @@ var width = 640;
 var height = 480;
 var detector;
 var item = false;
-var result=[]
-var maleSixty=[];
-var maleForty=[];
-var maleTwenty=[];
-var womenTwenty=[];
-var womenForty=[];
-var womenSixty=[];
+var result = []
+var maleSixty = [];
+var maleForty = [];
+var maleTwenty = [];
+var womenTwenty = [];
+var womenForty = [];
+var womenSixty = [];
+// import entire SDK
+// var AWS = require('aws-sdk');
+// // import AWS object without services
+// var AWS = require('aws-sdk/global');
+// // import individual service
+// var S3 = require('aws-sdk/clients/s3');
+
+
+
+
 onload = function () {
 
-    $.get("https://g7gu5b2l8j.execute-api.us-east-1.amazonaws.com/developer", function(data, status){
+    $.get("https://g7gu5b2l8j.execute-api.us-east-1.amazonaws.com/developer", function (data, status) {
         // alert("Data: " + data + "\nStatus: " + status);
         // console.log(JSON.stringify(data.body));
-    result=JSON.stringify(data.body)
-    console.log(result);
-    console.log(data.body)
-    for(i=0;i<data.body.length;i++){
-        if(data.body[i].customerAge=="M-40"){
-            maleForty.push(data.body[i].dress1);
-            maleForty.push(data.body[i].dress2);
-            maleForty.push(data.body[i].dress3);
-            maleForty.push(data.body[i].dress4);
-            maleForty.push(data.body[i].dress5);
+        result = JSON.stringify(data.body)
+        console.log(result);
+        console.log(data.body);
+
+        for (i = 0; i < data.body.length; i++) {
+            if (data.body[i].customerAge == "M-40") {
+                maleForty.push(data.body[i].dress1);
+                maleForty.push(data.body[i].dress2);
+                maleForty.push(data.body[i].dress3);
+                maleForty.push(data.body[i].dress4);
+                maleForty.push(data.body[i].dress5);
+            }
+            else if (data.body[i].customerAge == "M-60") {
+                maleSixty.push(data.body[i].dress1);
+                maleSixty.push(data.body[i].dress2);
+                maleSixty.push(data.body[i].dress3);
+                maleSixty.push(data.body[i].dress4);
+                maleSixty.push(data.body[i].dress5);
+            }
+            else if (data.body[i].customerAge == "M-20") {
+                maleTwenty.push(data.body[i].dress1);
+                maleTwenty.push(data.body[i].dress2);
+                maleTwenty.push(data.body[i].dress3);
+                maleTwenty.push(data.body[i].dress4);
+                maleTwenty.push(data.body[i].dress5);
+            }
+            else if (data.body[i].customerAge == "W-20") {
+                womenTwenty.push(data.body[i].dress1);
+                womenTwenty.push(data.body[i].dress2);
+                womenTwenty.push(data.body[i].dress3);
+                womenTwenty.push(data.body[i].dress4);
+                womenTwenty.push(data.body[i].dress5);
+            }
+            else if (data.body[i].customerAge == "W-40") {
+                womenForty.push(data.body[i].dress1);
+                womenForty.push(data.body[i].dress2);
+                womenForty.push(data.body[i].dress3);
+                womenForty.push(data.body[i].dress4);
+                womenForty.push(data.body[i].dress5);
+            }
+            else if (data.body[i].customerAge == "W-60") {
+                womenSixty.push(data.body[i].dress1);
+                womenSixty.push(data.body[i].dress2);
+                womenSixty.push(data.body[i].dress3);
+                womenSixty.push(data.body[i].dress4);
+                womenSixty.push(data.body[i].dress5);
+            }
         }
-        else if(data.body[i].customerAge=="M-60"){
-            maleSixty.push(data.body[i].dress1);
-            maleSixty.push(data.body[i].dress2);
-            maleSixty.push(data.body[i].dress3);
-            maleSixty.push(data.body[i].dress4);
-            maleSixty.push(data.body[i].dress5);
-        }
-        else if(data.body[i].customerAge=="M-20"){
-            maleTwenty.push(data.body[i].dress1);
-            maleTwenty.push(data.body[i].dress2);
-            maleTwenty.push(data.body[i].dress3);
-            maleTwenty.push(data.body[i].dress4);
-            maleTwenty.push(data.body[i].dress5);
-        }
-        else if(data.body[i].customerAge=="W-20"){
-            womenTwenty.push(data.body[i].dress1);
-            womenTwenty.push(data.body[i].dress2);
-            womenTwenty.push(data.body[i].dress3);
-            womenTwenty.push(data.body[i].dress4);
-            womenTwenty.push(data.body[i].dress5);
-        }
-        else if(data.body[i].customerAge=="W-40"){
-            womenForty.push(data.body[i].dress1);
-            womenForty.push(data.body[i].dress2);
-            womenForty.push(data.body[i].dress3);
-            womenForty.push(data.body[i].dress4);
-            womenForty.push(data.body[i].dress5);
-        }
-        else if(data.body[i].customerAge=="W-60"){
-            womenSixty.push(data.body[i].dress1);
-            womenSixty.push(data.body[i].dress2);
-            womenSixty.push(data.body[i].dress3);
-            womenSixty.push(data.body[i].dress4);
-            womenSixty.push(data.body[i].dress5);
-        }
-    }
         console.log(maleSixty);
         console.log(maleForty);
         console.log(maleTwenty);
         console.log(womenTwenty);
         console.log(womenForty);
         console.log(womenSixty);
-        document.getElementById("myImg").src=data.body[3].dress3;
-      });
+
+        document.getElementById("myImg").src = womenTwenty[4];
+    });
 
     // SDK Needs to create video and canvas nodes in the DOM in order to function
     // Here we are adding those nodes a predefined div.
@@ -95,7 +107,6 @@ onload = function () {
     //Add a callback to notify when camera access is allowed
     detector.addEventListener("onWebcamConnectSuccess", function () {
         log('logs', "Webcam access allowed");
-
     });
 
     //Add a callback to notify when camera access is denied
@@ -105,7 +116,7 @@ onload = function () {
     });
 
     //Add a callback to notify when detector is stopped
-    detector.addEventListener("onStopSuccess", function () {
+    detector.addEventListener("onStopSuccess", function () {      
         log('logs', "The detector reports stopped");
         document.getElementById("results").innerHTML = ""
     });
@@ -128,120 +139,331 @@ onload = function () {
             }));
             log('results', "Emoji: " + faces[0].emojis.dominantEmoji);
             drawFeaturePoints(image, faces[0].featurePoints);
+            if (faces[0].appearance["gender"] == 'Male') {
+                if (faces[0].appearance["age"] == 'Under 18') {
+                    document.getElementById("myImg").src = "https://www.thefryecompany.com/media/gene-cms/h/p/hp-hero-mens-walker.jpg";
+                    if (faces[0].emotions["joy"] >= 80) {
+                        document.getElementById("myui").innerHTML = "Happy";
+                        document.getElementById("myImg").src = "https://cdn.catwalkjunkie.com/media/easybanner/KV_SUMMER_19_SLIDER2_1.jpg";
+                        document.getElementById("cartImage").src = "https://cdn.catwalkjunkie.com/media/easybanner/KV_SUMMER_19_SLIDER2_1.jpg";
+                        $("#myModal").modal();
+                        detector.stop();
+                    }
+                    else if (faces[0].emotions["anger"] > 30) {
+                        document.getElementById("myui").innerHTML = "Anger";
+                        document.getElementById("myImg").src = "https://cdn.shopify.com/s/files/1/1721/2851/files/BST-MidSeasonSale-Slider-Men-EN_1920x.jpg?v=1554226956";
+                        setTimeout(function () {
+                            detector.reset();
+                        }, 3000);
+                    }
+                    else if (faces[0].expressions["dimpler"] > 20) {
+                        document.getElementById("myui").innerHTML = "Sad";
+                        document.getElementById("myImg").src = "https://www.montecarlo.in/images/slider1.jpg"
+                        setTimeout(function () {
+                            detector.reset();
+                        }, 3000);
+                    }
+                    else if (faces[0].expressions["browRaise"] > 50) {
+                        document.getElementById("myui").innerHTML = "Surprise";
+                        document.getElementById("myImg").src = "https://corporate.lloyd.com/var/site/storage/images/_aliases/gallery_full_image/2/0/8/0/802-3-eng-GB/Teaser_Slider_men_collection.jpg";
+                        setTimeout(function () {
+                            detector.reset();
+                        }, 3000);
+                    }
+                }
+                else if (faces[0].appearance["age"] == '18 - 24') {
+                    document.getElementById('myImg').src = "https://www.usc.co.uk/images/marketing/MENS-OUTLET-HERO.jpg";
+                    if (faces[0].emotions["joy"] >= 80) {
+                        document.getElementById("myui").innerHTML = "Happy";
+                        document.getElementById("myImg").src = maleTwenty[0];
+                        document.getElementById("cartImage").src = maleTwenty[0];
+                        $("#myModal").modal();
+                        detector.stop();
+                    }
+                    else if (faces[0].emotions["anger"] > 30) {
+                        document.getElementById("myui").innerHTML = "Anger";
+                        document.getElementById("myImg").src = maleTwenty[1];
+                        setTimeout(function () {
+                            detector.reset();
+                        }, 3000);
+                    }
+                    else if (faces[0].expressions["dimpler"] > 20) {
+                        document.getElementById("myui").innerHTML = "Sad";
+                        document.getElementById("myImg").src = maleTwenty[2];
+                        setTimeout(function () {
+                            detector.reset();
+                        }, 3000);
+                    }
+                    else if (faces[0].expressions["browRaise"] > 50) {
+                        document.getElementById("myui").innerHTML = "Surprise";
+                        document.getElementById("myImg").src = maleTwenty[3];
+                        setTimeout(function () {
+                            detector.reset();
+                        }, 3000);
+                    }
+                }
+                else if (faces[0].appearance["age"] == '25 - 34') {
+                    document.getElementById('myImg').src = maleForty[4];
+                    if (faces[0].emotions["joy"] >= 80) {
+                        document.getElementById("myui").innerHTML = "Happy";
+                        document.getElementById("myImg").src = maleForty[0];
+                        document.getElementById("cartImage").src = maleForty[0];
+                        $("#myModal").modal();
+                        detector.stop();
+                    }
+                    else if (faces[0].emotions["anger"] > 30) {
+                        document.getElementById("myui").innerHTML = "Anger";
+                        document.getElementById("myImg").src = maleTwenty[1];
+                        setTimeout(function () {
+                            detector.reset();
+                        }, 3000);
+                    }
+                    else if (faces[0].expressions["dimpler"] > 20) {
+                        document.getElementById("myui").innerHTML = "Sad";
+                        document.getElementById("myImg").src = maleForty[2];
+                        setTimeout(function () {
+                            detector.reset();
+                        }, 3000);
+                    }
+                    else if (faces[0].expressions["browRaise"] > 50) {
+                        document.getElementById("myui").innerHTML = "Surprise";
+                        document.getElementById("myImg").src = maleForty[3];
+                        setTimeout(function () {
+                            detector.reset();
+                        }, 3000);
+                    }
+                }
+                else if (faces[0].appearance["age"] == '35 - 44') {
+                    document.getElementById('myImg').src = maleForty[4];
+                    if (faces[0].emotions["joy"] >= 80) {
+                        document.getElementById("myui").innerHTML = "Happy";
+                        document.getElementById("myImg").src = maleForty[0];
+                        document.getElementById("cartImage").src = maleForty[0];
+                        $("#myModal").modal();
+                        detector.stop();
+                    }
+                    else if (faces[0].emotions["anger"] > 30) {
+                        document.getElementById("myui").innerHTML = "Anger";
+                        document.getElementById("myImg").src = maleTwenty[1];
+                        setTimeout(function () {
+                            detector.reset();
+                        }, 3000);
+                    }
+                    else if (faces[0].expressions["dimpler"] > 20) {
+                        document.getElementById("myui").innerHTML = "Sad";
+                        document.getElementById("myImg").src = maleForty[2];
+                        setTimeout(function () {
+                            detector.reset();
+                        }, 3000);
+                    }
+                    else if (faces[0].expressions["browRaise"] > 50) {
+                        document.getElementById("myui").innerHTML = "Surprise";
+                        document.getElementById("myImg").src = maleForty[3];
+                        setTimeout(function () {
+                            detector.reset();
+                        }, 3000);
+                    }
+                }
+                else if (faces[0].appearance["age"] == '55 - 65') {
+                    if (faces[0].emotions["joy"] >= 80) {
+                        document.getElementById("myui").innerHTML = "Happy";
+                        document.getElementById("myImg").src = maleSixty[0];
+                        document.getElementById("cartImage").src = maleSixty[0];
+                        $("#myModal").modal();
+                        detector.stop();
+                    }
+                    else if (faces[0].emotions["anger"] > 30) {
+                        document.getElementById("myui").innerHTML = "Anger";
+                        document.getElementById("myImg").src = maleSixty[1];
+                        setTimeout(function () {
+                            detector.reset();
+                        }, 3000);
+                    }
+                    else if (faces[0].expressions["dimpler"] > 20) {
+                        document.getElementById("myui").innerHTML = "Sad";
+                        document.getElementById("myImg").src = maleSixty[2];
+                        setTimeout(function () {
+                            detector.reset();
+                        }, 3000);
+                    }
+                    else if (faces[0].expressions["browRaise"] > 50) {
+                        document.getElementById("myui").innerHTML = "Surprise";
+                        document.getElementById("myImg").src = maleSixty[3];
+                        setTimeout(function () {
+                            detector.reset();
+                        }, 3000);
+                    }
+                }
+            }
 
+            /******************************* Women Section********************************/
 
-            // if((faces[0].appearance["gender"]="Male") && (faces[0].appearance["age"]="18-24")){
-            //     document.getElementById("myImg").src="https://cdn.shopify.com/s/files/1/1721/2851/files/BST-MidSeasonSale-Slider-Men-EN_1920x.jpg?v=1554226956";
-            //     setTimeout(function(){
-            //         detector.reset();
-            //       }, 1000);
-            // }
-            // if((faces[0].appearance["gender"]="Male") && (faces[0].appearance["age"]="18-24") && 
-            // faces[0].emotions["joy"]>=80){
-            //     document.getElementById("myImg").src="http://quintessencetailor.com/catalog/view/theme/quintessence/images/slider/slide1.jpg";
-            //     setTimeout(function(){
-            //         detector.reset();
-            //       }, 1000);
-            // }
-            // else if((faces[0].appearance["gender"]="Male") && (faces[0].appearance["age"]="35-44")){
-            //     document.getElementById("myImg").src="https://cdn.shopify.com/s/files/1/1721/2851/files/BST-MidSeasonSale-Slider-Men-EN_1920x.jpg?v=1554226956";
-            //     setTimeout(function(){
-            //         detector.reset();
-            //       }, 1000);
-            // }
-            // else if(faces[0].appearance["gender"]="Female" && (faces[0].appearance["age"]="18-24") ){
-            //     document.getElementById("myImg").src="https://cdn.shopify.com/s/files/1/0022/9530/0155/t/7/assets/DISTRICT_HPSLIDER.jpg";
-            //     setTimeout(function(){
-            //         detector.reset();
-            //       }, 1000);
-            // }
-            // else if(faces[0].appearance["gender"]="Female" && (faces[0].appearance["age"]="35-44") ){
-            //     document.getElementById("myImg").src="https://queenspark.com/wp-content/uploads/2019/03/Winter_Collection_Desktop_Banner.png";
-            //     setTimeout(function(){
-            //         detector.reset();
-            //       }, 1000);
-            // }
-
-            // Primitive UI for happy
-            if (faces[0].emotions["joy"] > 75 && faces[0].appearance["gender"] == 'Male') {
-                document.getElementById("myui").innerHTML = "Happy!!!";
-                document.getElementById("cartImage").src="https://cdn-images.italist.com/image/upload/dpr_2,h_450,w_1000/v1/home/desktop/slider/1dcdd977a02d57539f74c84639bbec8f.jpg"
-                document.getElementById("myImg").src = "https://cdn-images.italist.com/image/upload/dpr_2,h_450,w_1000/v1/home/desktop/slider/1dcdd977a02d57539f74c84639bbec8f.jpg";
-                setTimeout(function(){
-                    detector.reset();
-                  }, 3000);
-                $("#myModal").modal();
-                detector.stop();
-            }
-            else if (faces[0].emotions["anger"] > 30 && faces[0].appearance["gender"]=="Male") {
-                document.getElementById("myui").innerHTML = "Anger";
-                document.getElementById("myImg").src = "https://www.montecarlo.in/images/slider1.jpg";
-                setTimeout(function(){
-                    detector.reset();
-                  }, 3000);
-            }
-            else if (faces[0].emotions["browFurrow"] > 10 && faces[0].appearance["gender"]=="Female") {
-                document.getElementById("myui").innerHTML = "Disgusting";
-                document.getElementById("myImg").src = "https://www.kayseria.com/media/homepageslider/homepageslider/kayseria_sliderD_summer19_vol1_pret.jpg";
-                setTimeout(function(){
-                    detector.reset();
-                  }, 3000);
-            }
-            else if (faces[0].expressions["dimpler"]> 20 && faces[0].appearance["gender"]=="Male") {
-                document.getElementById("myui").innerHTML = "Sad";
-                document.getElementById("myImg").src = "https://cdn.shopify.com/s/files/1/1721/2851/files/BST-MidSeasonSale-Slider-Men-EN_1920x.jpg?v=1554226956";
-                setTimeout(function(){
-                    detector.reset();
-                  }, 3000);
-            }
-            else if (faces[0].expressions["browRaise"]> 50 && faces[0].appearance["gender"]=="Male") {
-                document.getElementById("myui").innerHTML = "Surprise";
-                document.getElementById("myImg").src = "http://quintessencetailor.com/catalog/view/theme/quintessence/images/slider/slide1.jpg";
-                setTimeout(function(){
-                    detector.reset();
-                  }, 3000);
-            }
-            else if (faces[0].appearance["gender"] == 'Male') {
-                document.getElementById("category").innerHTML="Male";
-                document.getElementById("myImg").src = "https://corporate.lloyd.com/var/site/storage/images/_aliases/gallery_full_image/2/0/8/0/802-3-eng-GB/Teaser_Slider_men_collection.jpg";
-            //   setTimeout(function(){
-            //     detector.reset();
-            //   }, 3000);
-             }
             else if (faces[0].appearance["gender"] == 'Female') {
-                document.getElementById("myui").innerHTML = "";
-                document.getElementById("category").innerHTML="Female"
-                document.getElementById("myImg").src = "https://cdn.shopify.com/s/files/1/0022/9530/0155/t/7/assets/DISTRICT_HPSLIDER.jpg";
+
+                /** *************Age Section Under 18*************** */
+
+                if (faces[0].appearance["age"] == 'Under 18') {
+                    document.getElementById("myImg").src = "https://queenspark.com/wp-content/uploads/2019/02/Valentines_Day_Banner_Desktop.png";
+                    if (faces[0].emotions["joy"] >= 80) {
+                        document.getElementById("myui").innerHTML = "Happy";
+                        document.getElementById("myImg").src = "https://arbikas.com/pub/media/wysiwyg/smartwave/porto/homepage/03/slider/slide2.jpg";
+                        document.getElementById("cartImage").src = "https://arbikas.com/pub/media/wysiwyg/smartwave/porto/homepage/03/slider/slide2.jpg";
+                        $("#myModal").modal();
+                        detector.stop();
+                    }
+                    else if (faces[0].emotions["anger"] > 10) {
+                        document.getElementById("myui").innerHTML = "Anger";
+                        document.getElementById("myImg").src = "https://queenspark.com/wp-content/uploads/2019/01/cath.nic_Miss_Cassidy_Website.png";
+                        setTimeout(function () {
+                            detector.reset();
+                        }, 3000);
+                    }
+                    else if (faces[0].expressions["dimpler"] > 20) {
+                        document.getElementById("myui").innerHTML = "Sad";
+                        document.getElementById("myImg").src = "https://cdn.catwalkjunkie.com/media/easybanner/KV_SPRING_19_FEB_SLIDER1_1.jpg";
+                        setTimeout(function () {
+                            detector.reset();
+                        }, 3000);
+                    }
+                    else if (faces[0].expressions["browRaise"] > 50) {
+                        document.getElementById("myui").innerHTML = "Surprise";
+                        document.getElementById("myImg").src = "https://www.kazo.com/pub/static/version1554118313/frontend/Solwin/freego/en_US/images/newarrbags.jpg";
+                        setTimeout(function () {
+                            detector.reset();
+                        }, 3000);
+                    }
+                }
+                else if(faces[0].appearance["age"]== '25-34'){
+                    if (faces[0].emotions["joy"] >= 80) {
+                        document.getElementById("myui").innerHTML = "Happy";
+                        document.getElementById("myImg").src = womenTwenty[0];
+                        document.getElementById("cartImage").src = womenTwenty[0];
+                        $("#myModal").modal();
+                        detector.stop();
+                    }
+                    else if (faces[0].emotions["anger"] > 10) {
+                        document.getElementById("myui").innerHTML = "Anger";
+                        document.getElementById("myImg").src = womenTwenty[1];
+                        setTimeout(function () {
+                            detector.reset();
+                        }, 3000);
+                    }
+                    else if (faces[0].expressions["dimpler"] > 20) {
+                        document.getElementById("myui").innerHTML = "Sad";
+                        document.getElementById("myImg").src = womenTwenty[2];
+                        setTimeout(function () {
+                            detector.reset();
+                        }, 3000);
+                    }
+                    else if (faces[0].expressions["browRaise"] > 50) {
+                        document.getElementById("myui").innerHTML = "Surprise";
+                        document.getElementById("myImg").src = womenTwenty[3];
+                        setTimeout(function () {
+                            detector.reset();
+                        }, 3000);
+                    }
+                }
+
+                /** *******************Age Section Between 18 and 24********** */
+
+                else if (faces[0].appearance["age"] == '18 - 24') {
+                    if (faces[0].emotions["joy"] >= 80) {
+                        document.getElementById("myui").innerHTML = "Happy";
+                        document.getElementById("myImg").src = womenTwenty[0];
+                        document.getElementById("cartImage").src = womenTwenty[0];
+                        $("#myModal").modal();
+                        detector.stop();
+                    }
+                    else if (faces[0].emotions["anger"] > 10) {
+                        document.getElementById("myui").innerHTML = "Anger";
+                        document.getElementById("myImg").src = womenTwenty[1];
+                        setTimeout(function () {
+                            detector.reset();
+                        }, 3000);
+                    }
+                    else if (faces[0].expressions["dimpler"] > 20) {
+                        document.getElementById("myui").innerHTML = "Sad";
+                        document.getElementById("myImg").src = womenTwenty[2];
+                        setTimeout(function () {
+                            detector.reset();
+                        }, 3000);
+                    }
+                    else if (faces[0].expressions["browRaise"] > 50) {
+                        document.getElementById("myui").innerHTML = "Surprise";
+                        document.getElementById("myImg").src = womenTwenty[3];
+                        setTimeout(function () {
+                            detector.reset();
+                        }, 3000);
+                    }
+                }
+
+                /** ***************Age Section Between 35 and 44*************** */
+
+                else if (faces[0].appearance["age"] == '35 - 44') {
+                    if (faces[0].emotions["joy"] >= 80) {
+                        document.getElementById("myui").innerHTML = "Happy";
+                        document.getElementById("myImg").src = womenForty[0];
+                        document.getElementById("cartImage").src = womenForty[0];
+                        $("#myModal").modal();
+                        detector.stop()
+                    }
+                    else if (faces[0].emotions["anger"] > 10) {
+                        document.getElementById("myui").innerHTML = "Anger";
+                        document.getElementById("myImg").src = womenForty[1];
+                        setTimeout(function () {
+                            detector.reset();
+                        }, 3000);
+                    }
+                    else if (faces[0].expressions["dimpler"] > 20) {
+                        document.getElementById("myui").innerHTML = "Sad";
+                        document.getElementById("myImg").src = womenForty[2];
+                        setTimeout(function () {
+                            detector.reset();
+                        }, 3000);
+                    }
+                    else if (faces[0].expressions["browRaise"] > 50) {
+                        document.getElementById("myui").innerHTML = "Surprise";
+                        document.getElementById("myImg").src = womenForty[3];
+                        setTimeout(function () {
+                            detector.reset();
+                        }, 3000);
+                    }
+                }
+                else if (faces[0].appearance["age"] == '55 - 65') {                    
+                    if (faces[0].emotions["joy"] >= 80) {
+                        document.getElementById("myui").innerHTML = "Happy";
+                        document.getElementById("myImg").src = womenSixty[0];
+                        document.getElementById("cartImage").src = womenSixty[0];
+                        $("#myModal").modal();
+                        detector.stop()
+                    }
+                    else if (faces[0].emotions["anger"] > 10) {
+                        document.getElementById("myui").innerHTML = "Anger";
+                        document.getElementById("myImg").src = womenSixty[1];
+                        setTimeout(function () {
+                            detector.reset();
+                        }, 3000);
+                    }
+                    else if (faces[0].expressions["dimpler"] > 20) {
+                        document.getElementById("myui").innerHTML = "Sad";
+                        document.getElementById("myImg").src = womenSixty[2];
+                        setTimeout(function () {
+                            detector.reset();
+                        }, 3000);
+                    }
+                    else if (faces[0].expressions["browRaise"] > 50) {
+                        document.getElementById("myui").innerHTML = "Surprise";
+                        document.getElementById("myImg").src = womenSixty[3];
+                        setTimeout(function () {
+                            ``
+                            detector.reset();
+                        }, 3000);
+                    }
+                }
             }
-            else if (faces[0].appearance["gender"] == 'Female' && faces[0].emotions["joy"]>75) {
-                document.getElementById("category").innerHTML="Female";
-                document.getElementById("cartImage").src="https://arbikas.com/pub/media/wysiwyg/smartwave/porto/homepage/03/slider/slide2.jpg";
-                document.getElementById("myImg").src = "https://arbikas.com/pub/media/wysiwyg/smartwave/porto/homepage/03/slider/slide2.jpg";
-                setTimeout(function(){
-                    detector.reset();
-                  }, 3000);
-                  $("#myModal").modal();
-                  detector.stop();
-            }
-            else if(faces[0].appearance["gender"]=='Female' && faces[0].emotions["anger"] >10) {
-                document.getElementById("myImg").src="https://queenspark.com/wp-content/uploads/2019/02/Plus_Banner_Desktop.png";
-                setTimeout(function(){
-                    detector.reset();
-                  }, 3000);
-            }
-            else if(faces[0].appearance["gender"] == 'Female' && faces[0].emotions["sadness"]>20){
-                document.getElementById("myImg").src="https://cdn.catwalkjunkie.com/media/easybanner/KV_SPRING_19_FEB_SLIDER1_1.jpg";
-                 setTimeout(function(){
-                detector.reset();
-              }, 3000);
-            }
-            else if (faces[0].expressions["browRaise"]> 50 && faces[0].appearance["gender"]=="Male") {
-                document.getElementById("myui").innerHTML = "Surprise";
-                document.getElementById("myImg").src = "https://static.jaypore.com/media/bsimages/20032019-the-great-seasonal-splurge-slider.jpg";
-                setTimeout(function(){
-                    detector.reset();
-                  }, 3000);
-            }
+            // else {
+            //     document.getElementById("myImg").src = "https://cdn.shopify.com/s/files/1/0411/6201/t/58/assets/slider-02.jpg?231"
+            // }
         }
     });
 }
